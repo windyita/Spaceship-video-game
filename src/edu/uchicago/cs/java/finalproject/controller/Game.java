@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.logging.Level;
 
 import javax.sound.sampled.Clip;
 import javax.swing.*;
@@ -297,7 +298,7 @@ public class Game implements Runnable, KeyListener {
 		//make the appearance of power-up dependent upon ticks and levels
 		//the higher the level the more frequent the appearance
 		//if (nTick % (SPAWN_NEW_SHIP_FLOATER - nLevel * 7) == 0) {
-        if(nTick % 40 == 0){
+        if(nTick % (40* nLevel) == 0){
 			CommandCenter.movFloaters.add(new NewShipFloater());
 		}
 	}
@@ -324,32 +325,38 @@ public class Game implements Runnable, KeyListener {
 	
 	private boolean isLevelClear(){
 		//if there are no more Asteroids on the screen
-		
-		boolean bAsteroidFree = true;
-		for (Movable movFoe : CommandCenter.movFoes) {
-			if (movFoe instanceof Asteroid){
-				bAsteroidFree = false;
-				break;
-			}
-		}
-		
-		return bAsteroidFree;
 
-		
+//		boolean bAsteroidFree = true;
+//		for (Movable movFoe : CommandCenter.movFoes) {
+//			if (movFoe instanceof Asteroid){
+//				bAsteroidFree = false;
+//				break;
+//			}
+//		}
+//
+//		return bAsteroidFree;
+
+        if(CommandCenter.getScore() == CommandCenter.getLevel()*CommandCenter.getLevel()*5){
+            return true;
+        }
+        else
+            return false;
 	}
-	
+
 	private void checkNewLevel(){
-		
+
 		if (isLevelClear() ){
 			if (CommandCenter.getFalcon() !=null)
 				CommandCenter.getFalcon().setProtected(true);
-			
+
 			spawnAsteroids(CommandCenter.getLevel() + 2);
 			CommandCenter.setLevel(CommandCenter.getLevel() + 1);
 
 		}
 	}
-	
+
+
+
 	
 	
 

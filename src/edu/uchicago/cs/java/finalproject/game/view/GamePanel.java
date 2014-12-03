@@ -63,9 +63,9 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 		g.setColor(Color.white);
 		g.setFont(fnt);
 		if (CommandCenter.getScore() != 0) {
-			g.drawString("SCORE :  " + CommandCenter.getScore(), nFontWidth, nFontHeight);
+			g.drawString("SCORE :  " + CommandCenter.getScore() + " LEVEL : " + CommandCenter.getLevel(), nFontWidth, nFontHeight);
 		} else {
-			g.drawString("NO SCORE", nFontWidth, nFontHeight);
+			g.drawString("NO SCORE" + " LEVEL : " + CommandCenter.getLevel(), nFontWidth, nFontHeight);
 		}
 	}
 	
@@ -78,8 +78,9 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 			grpOff = imgOff.getGraphics();
 		}
 		// Fill in background with black.
-		grpOff.setColor(Color.black);
-		grpOff.fillRect(0, 0, Game.DIM.width, Game.DIM.height);
+		//grpOff.setColor(Color.black);
+		//grpOff.fillRect(0, 0, Game.DIM.width, Game.DIM.height);
+        grpOff.drawImage(img, 0, 0, this);
 
 		drawScore(grpOff);
         if (!CommandCenter.isPlaying()) {
