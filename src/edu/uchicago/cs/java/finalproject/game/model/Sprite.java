@@ -57,6 +57,7 @@ public abstract class Sprite implements Movable {
 
 		} else if (pnt.x < 0) {
 			setCenter(new Point(getDim().width - 1, pnt.y));
+            //setCenter(new Point(5, pnt.y));
 		} else if (pnt.y > getDim().height) {
 			setCenter(new Point(pnt.x, 1));
 
@@ -267,10 +268,6 @@ public abstract class Sprite implements Movable {
 	}
 	
 
-
-
-
-	
     public void draw(Graphics g) {
         nXCoords = new int[dDegrees.length];
         nYCoords = new int[dDegrees.length];

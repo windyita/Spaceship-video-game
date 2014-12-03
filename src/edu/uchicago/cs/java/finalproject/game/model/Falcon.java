@@ -14,7 +14,8 @@ public class Falcon extends Sprite {
 	// FIELDS 
 	// ==============================================================
 	
-	private final double THRUST = .65;
+	//speed
+    private final double THRUST = .65;
 
 	final int DEGREE_STEP = 7;
 	
@@ -105,6 +106,8 @@ public class Falcon extends Sprite {
 					* THRUST;
 			setDeltaX(getDeltaX() + dAdjustX);
 			setDeltaY(getDeltaY() + dAdjustY);
+            //setDeltaX(dAdjustX);
+            //setDeltaY(dAdjustY);
 		}
 		if (bTurningLeft) {
 

@@ -1,14 +1,9 @@
 package edu.uchicago.cs.java.finalproject.game.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Panel;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.WindowEvent;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.JFrame;
@@ -38,6 +33,7 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 	private int nFontWidth;
 	private int nFontHeight;
 	private String strDisplay = "";
+    private Image img ;
 	
 
 	// ==============================================================
@@ -45,7 +41,8 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 	// ==============================================================
 	
 	public GamePanel(Dimension dim){
-	    gmf = new GameFrame();
+        img = Toolkit.getDefaultToolkit().getImage(GamePanel.class.getResource("background.jpeg"));
+        gmf = new GameFrame();
 		gmf.getContentPane().add(this);
 		gmf.pack();
 		initView();
@@ -85,8 +82,7 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 		grpOff.fillRect(0, 0, Game.DIM.width, Game.DIM.height);
 
 		drawScore(grpOff);
-		
-		if (!CommandCenter.isPlaying()) {
+        if (!CommandCenter.isPlaying()) {
 			displayTextOnScreen();
 		} else if (CommandCenter.isPaused()) {
 			strDisplay = "Game Paused";
@@ -114,6 +110,7 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 		}
 		//draw the double-Buffered Image to the graphics context of the panel
 		g.drawImage(imgOff, 0, 0, this);
+       // g.drawImage(img, 0, 0, Game.DIM.width, Game.DIM.height, this);
 	} 
 
 
@@ -175,7 +172,7 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 	
 	// This method draws some text to the middle of the screen before/after a game
 	private void displayTextOnScreen() {
-
+        grpOff.drawImage(img, 0, 0, this);
 		strDisplay = "GAME OVER";
 		grpOff.drawString(strDisplay,
 				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4);
@@ -218,6 +215,7 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 		grpOff.drawString(strDisplay,
 				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
 						+ nFontHeight + 320);
+
 	}
 	
 	public GameFrame getFrm() {return this.gmf;}

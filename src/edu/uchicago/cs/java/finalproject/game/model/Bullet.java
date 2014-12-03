@@ -48,8 +48,9 @@ public Bullet(Falcon fal){
 
     //override the expire method - once an object expires, then remove it from the arrayList. 
 	public void expire(){
- 		if (getExpire() == 0)
- 			CommandCenter.movFriends.remove(this);
+ 		if (getExpire() == 0) {
+            //CommandCenter.movFriends.remove(this);
+        }
 		 else 
 			setExpire(getExpire() - 1);
 	}

@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.sound.sampled.Clip;
+import javax.swing.*;
 
 import edu.uchicago.cs.java.finalproject.game.model.*;
 import edu.uchicago.cs.java.finalproject.game.view.*;
@@ -123,6 +124,7 @@ public class Game implements Runnable, KeyListener {
 			//should increase with the level. 
 			checkNewLevel();
 
+
 			try {
 				// The total amount of time is guaranteed to be at least ANI_DELAY long.  If processing (update) 
 				// between frames takes longer than ANI_DELAY, then the difference between lStartTime - 
@@ -210,6 +212,7 @@ public class Game implements Runnable, KeyListener {
 	
 					
 					tupMarkForRemovals.add(new Tuple(CommandCenter.movFloaters, movFloater));
+                    CommandCenter.setNumFalcons(CommandCenter.getNumFalcons() + 1);
 					Sound.playSound("pacman_eatghost.wav");
 	
 				}//end if 
@@ -237,6 +240,12 @@ public class Game implements Runnable, KeyListener {
 
 			//we know this is an Asteroid, so we can cast without threat of ClassCastException
 			Asteroid astExploded = (Asteroid)movFoe;
+//            Explosion exp = new Explosion(movFoe);
+//            while(exp.getnExpiry()>0){
+//                exp.expire();
+//            }
+
+            CommandCenter.setScore(CommandCenter.getScore()+1);
 			//big asteroid 
 			if(astExploded.getSize() == 0){
 				//spawn two medium Asteroids
@@ -287,7 +296,8 @@ public class Game implements Runnable, KeyListener {
 	private void spawnNewShipFloater() {
 		//make the appearance of power-up dependent upon ticks and levels
 		//the higher the level the more frequent the appearance
-		if (nTick % (SPAWN_NEW_SHIP_FLOATER - nLevel * 7) == 0) {
+		//if (nTick % (SPAWN_NEW_SHIP_FLOATER - nLevel * 7) == 0) {
+        if(nTick % 40 == 0){
 			CommandCenter.movFloaters.add(new NewShipFloater());
 		}
 	}
