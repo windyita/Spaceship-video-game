@@ -51,7 +51,8 @@ public class Asteroid extends Sprite {
 		else
 			setRadius(RAD/(nSize * 2));
 
-        setColor(new Color(Game.R.nextInt(256),Game.R.nextInt(256),Game.R.nextInt(256)));
+        //setColor(new Color(Game.R.nextInt(256),Game.R.nextInt(256),Game.R.nextInt(256)));
+        setColor(Color.orange);
 		
 
 	}
@@ -93,7 +94,8 @@ public class Asteroid extends Sprite {
 
 		setRadius(RAD/(nSizeNew * 2));
 		setCenter(astExploded.getCenter());
-        setColor(new Color(Game.R.nextInt(256),Game.R.nextInt(256),Game.R.nextInt(256)));
+        //setColor(new Color(Game.R.nextInt(256),Game.R.nextInt(256),Game.R.nextInt(256)));
+        setColor(Color.orange);
 		
 		
 		

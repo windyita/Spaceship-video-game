@@ -24,7 +24,7 @@ public class Game implements Runnable, KeyListener {
 	// FIELDS
 	// ===============================================
 
-	public static final Dimension DIM = new Dimension(1100, 900); //the dimension of the game.
+	public static final Dimension DIM = new Dimension(1000, 750); //the dimension of the game.
 	private GamePanel gmpPanel;
 	public static Random R = new Random();
 	public final static int ANI_DELAY = 45; // milliseconds between screen
@@ -241,11 +241,8 @@ public class Game implements Runnable, KeyListener {
 
 			//we know this is an Asteroid, so we can cast without threat of ClassCastException
 			Asteroid astExploded = (Asteroid)movFoe;
-            Explosion exp = new Explosion(movFoe);
-            exp.expire();
-//            while(exp.getnExpiry()>0){
-//                exp.expire();
-//            }
+            tupMarkForAdds.add(new Tuple(CommandCenter.movDebris,new Explosion(astExploded)));
+
 
             CommandCenter.setScore(CommandCenter.getScore()+1);
 			//big asteroid 
@@ -253,6 +250,7 @@ public class Game implements Runnable, KeyListener {
 				//spawn two medium Asteroids
 				tupMarkForAdds.add(new Tuple(CommandCenter.movFoes,new Asteroid(astExploded)));
 				tupMarkForAdds.add(new Tuple(CommandCenter.movFoes,new Asteroid(astExploded)));
+
 				
 			} 
 			//medium size aseroid exploded
@@ -299,9 +297,9 @@ public class Game implements Runnable, KeyListener {
 		//make the appearance of power-up dependent upon ticks and levels
 		//the higher the level the more frequent the appearance
 		//if (nTick % (SPAWN_NEW_SHIP_FLOATER - nLevel * 7) == 0) {
-//        if(nTick % (40* nLevel) == 0){
-//			CommandCenter.movFloaters.add(new NewShipFloater());
-//		}
+        if(nTick % (40* nLevel) == 0){
+			CommandCenter.movFloaters.add(new NewShipFloater());
+		}
 	}
 
 	// Called when user presses 's'
@@ -351,8 +349,25 @@ public class Game implements Runnable, KeyListener {
 			if (CommandCenter.getFalcon() !=null)
 				CommandCenter.getFalcon().setProtected(true);
 
+
+
 			spawnAsteroids(CommandCenter.getLevel() + 2);
 			CommandCenter.setLevel(CommandCenter.getLevel() + 1);
+            if(CommandCenter.getLevel()!=1) {
+
+                for (Movable movFoe : CommandCenter.movFoes) {
+                    tupMarkForRemovals.add(new Tuple(CommandCenter.movFoes, movFoe));
+                }
+                for (Tuple tup : tupMarkForRemovals)
+                    tup.removeMovable();
+
+                JOptionPane.showMessageDialog(null, "Welcome to Level " + CommandCenter.getLevel(),
+                        null, JOptionPane.PLAIN_MESSAGE);
+                tick();
+                spawnAsteroids(CommandCenter.getLevel()*2);
+            }
+
+
 
 		}
 	}

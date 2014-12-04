@@ -27,7 +27,7 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 	private Graphics grpOff;
 	
 	private GameFrame gmf;
-	private Font fnt = new Font("SansSerif", Font.BOLD, 12);
+	private Font fnt = new Font("SansSerif", Font.BOLD, 16);
 	private Font fntBig = new Font("SansSerif", Font.BOLD + Font.ITALIC, 36);
 	private FontMetrics fmt; 
 	private int nFontWidth;
@@ -43,7 +43,7 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 	// ==============================================================
 	
 	public GamePanel(Dimension dim){
-        img = Toolkit.getDefaultToolkit().getImage(GamePanel.class.getResource("background.jpeg"));
+        img = Toolkit.getDefaultToolkit().getImage(GamePanel.class.getResource("start.gif"));
         img2 = Toolkit.getDefaultToolkit().getImage(GamePanel.class.getResource("back2.jpg"));
         img3 = Toolkit.getDefaultToolkit().getImage(GamePanel.class.getResource("result.gif"));
         gmf = new GameFrame();
@@ -227,12 +227,12 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 		strDisplay = "left index finger on 'F' for Guided Missile";
 		grpOff.drawString(strDisplay,
 				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ nFontHeight + 280);
+						+ nFontHeight + 320);
 
 		strDisplay = "'Numeric-Enter' for Hyperspace";
 		grpOff.drawString(strDisplay,
 				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ nFontHeight + 320);
+						+ nFontHeight + 360);
 
 	}
 
