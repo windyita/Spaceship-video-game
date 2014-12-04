@@ -1,8 +1,6 @@
 package edu.uchicago.cs.java.finalproject.game.model;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
+import java.awt.*;
 import java.util.ArrayList;
 
 import edu.uchicago.cs.java.finalproject.controller.Game;
@@ -11,6 +9,7 @@ public class NewShipFloater extends Sprite {
 
 
 	private int nSpin;
+    private Image img = Toolkit.getDefaultToolkit().getImage(NewShipFloater.class.getResource("xuchen.gif"));
 
 	public NewShipFloater() {
 
@@ -18,20 +17,20 @@ public class NewShipFloater extends Sprite {
 
 		ArrayList<Point> pntCs = new ArrayList<Point>();
 		// top of ship
-		pntCs.add(new Point(5, 5));
-		pntCs.add(new Point(4,0));
-		pntCs.add(new Point(5, -5));
-		pntCs.add(new Point(0,-4));
-		pntCs.add(new Point(-5, -5));
-		pntCs.add(new Point(-4,0));
-		pntCs.add(new Point(-5, 5));
-		pntCs.add(new Point(0,4));
+		pntCs.add(new Point(3, 3));
+		pntCs.add(new Point(3,0));
+		pntCs.add(new Point(3, -3));
+		pntCs.add(new Point(0,-3));
+		pntCs.add(new Point(-3, -3));
+		pntCs.add(new Point(-3,0));
+		pntCs.add(new Point(-3, 3));
+		pntCs.add(new Point(0,3));
 
 		assignPolarPoints(pntCs);
 
 		setExpire(250);
-		setRadius(50);
-		setColor(Color.BLUE);
+		setRadius(40);
+		setColor(Color.BLACK);
 
 
 		int nX = Game.R.nextInt(10);
@@ -91,12 +90,14 @@ public class NewShipFloater extends Sprite {
 
 	@Override
 	public void draw(Graphics g) {
-		super.draw(g);
+		//super.draw(g);
 		//fill this polygon (with whatever color it has)
-		g.fillPolygon(getXcoords(), getYcoords(), dDegrees.length);
+		//g.fillPolygon(getXcoords(), getYcoords(), dDegrees.length);
 		//now draw a white border
-		g.setColor(Color.WHITE);
-		g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
+		//g.setColor(Color.BLACK);
+		//g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
+        g.drawImage(img,getCenter().x-42 , getCenter().y-42 , null);
+
 	}
 
 }

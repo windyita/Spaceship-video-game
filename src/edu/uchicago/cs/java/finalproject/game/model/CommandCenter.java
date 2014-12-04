@@ -14,6 +14,7 @@ public class CommandCenter {
 	private static Falcon falShip;
 	private static boolean bPlaying;
 	private static boolean bPaused;
+    private static boolean bGameover;
 	
 	// These ArrayLists are thread-safe
 	public static CopyOnWriteArrayList<Movable> movDebris = new CopyOnWriteArrayList<Movable>();
@@ -65,6 +66,12 @@ public class CommandCenter {
 	public static boolean isPaused() {
 		return bPaused;
 	}
+
+    public static boolean isGameover() { return bGameover;}
+
+    public static void setbGameover(boolean bGameover){
+        CommandCenter.bGameover = bGameover;
+    }
 
 	public static void setPaused(boolean bPaused) {
 		CommandCenter.bPaused = bPaused;

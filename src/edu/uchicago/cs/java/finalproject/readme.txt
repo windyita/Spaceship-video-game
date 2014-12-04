@@ -5,6 +5,9 @@ I implemented the following things:
 - When the falcon collides with a NewShipFloater, you should increment the number of falcons
 
 - change the background
+- change the apprearance of many elements
 - When the falcon fly to the edge of the screen, it won't appear from the other side
 - change the rules for level up and show it on screen
+- add a page to display result when game over
+
 

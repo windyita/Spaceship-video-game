@@ -1,6 +1,7 @@
 package edu.uchicago.cs.java.finalproject.game.model;
 
 
+import java.awt.*;
 import java.util.Arrays;
 
 import edu.uchicago.cs.java.finalproject.controller.Game;
@@ -49,6 +50,8 @@ public class Asteroid extends Sprite {
 			setRadius(RAD);
 		else
 			setRadius(RAD/(nSize * 2));
+
+        setColor(new Color(Game.R.nextInt(256),Game.R.nextInt(256),Game.R.nextInt(256)));
 		
 
 	}
@@ -90,13 +93,14 @@ public class Asteroid extends Sprite {
 
 		setRadius(RAD/(nSizeNew * 2));
 		setCenter(astExploded.getCenter());
+        setColor(new Color(Game.R.nextInt(256),Game.R.nextInt(256),Game.R.nextInt(256)));
 		
 		
 		
 
 	}
-	
-	public int getSize(){
+
+    public int getSize(){
 		
 		int nReturn = 0;
 		
@@ -170,5 +174,16 @@ public class Asteroid extends Sprite {
 		setLengths(dLengths);
 
 	  }
+
+    @Override
+    public void draw(Graphics g) {
+        super.draw(g);
+        //fill this polygon (with whatever color it has)
+        g.fillPolygon(getXcoords(), getYcoords(), dDegrees.length);
+        //now draw a white border
+        //g.setColor(Color.BLACK);
+        //g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
+
+    }
 
 }

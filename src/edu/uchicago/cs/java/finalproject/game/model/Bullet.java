@@ -1,6 +1,6 @@
 package edu.uchicago.cs.java.finalproject.game.model;
 
-import java.awt.Point;
+import java.awt.*;
 import java.util.ArrayList;
 
 import edu.uchicago.cs.java.finalproject.controller.Game;
@@ -9,10 +9,11 @@ import edu.uchicago.cs.java.finalproject.controller.Game;
 public class Bullet extends Sprite {
 
 	  private final double FIRE_POWER = 35.0;
+      private Image img = Toolkit.getDefaultToolkit().getImage(Bullet.class.getResource("bullet.gif"));
 
 	 
 	
-public Bullet(Falcon fal){
+        public Bullet(Falcon fal){
 		
 		super();
 		
@@ -20,17 +21,18 @@ public Bullet(Falcon fal){
 		//defined the points on a cartesean grid
 		ArrayList<Point> pntCs = new ArrayList<Point>();
 		
-		pntCs.add(new Point(0,3)); //top point
+		pntCs.add(new Point(0,1)); //top point
 		
-		pntCs.add(new Point(1,-1));
-		pntCs.add(new Point(0,-2));
-		pntCs.add(new Point(-1,-1));
+		pntCs.add(new Point(1,0));
+		pntCs.add(new Point(0,-1));
+		pntCs.add(new Point(-1,0));
 
 		assignPolarPoints(pntCs);
 
 		//a bullet expires after 20 frames
 	    setExpire( 20 );
 	    setRadius(6);
+        setColor(Color.WHITE);
 	    
 
 	    //everything is relative to the falcon ship that fired the bullet
@@ -52,5 +54,19 @@ public Bullet(Falcon fal){
 		 else 
 			setExpire(getExpire() - 1);
 	}
+
+
+    @Override
+    public void draw(Graphics g) {
+        //super.draw(g);
+        //fill this polygon (with whatever color it has)
+        //g.fillPolygon(getXcoords(), getYcoords(), dDegrees.length);
+        //now draw a white border
+        //g.setColor(Color.WHITE);
+        //g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
+        g.drawImage(img,getCenter().x-10 , getCenter().y-10 , null);
+
+
+    }
 
 }

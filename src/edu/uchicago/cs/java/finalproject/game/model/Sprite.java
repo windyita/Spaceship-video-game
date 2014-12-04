@@ -1,9 +1,6 @@
 package edu.uchicago.cs.java.finalproject.game.model;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Point;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -322,5 +319,6 @@ public abstract class Sprite implements Movable {
 	public void setFadeValue(int n) {
 		nFade = n;
 	}
+
 
 }

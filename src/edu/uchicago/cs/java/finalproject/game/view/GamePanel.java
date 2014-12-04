@@ -34,6 +34,8 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 	private int nFontHeight;
 	private String strDisplay = "";
     private Image img ;
+    private Image img2 ;
+    private Image img3 ;
 	
 
 	// ==============================================================
@@ -42,6 +44,8 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 	
 	public GamePanel(Dimension dim){
         img = Toolkit.getDefaultToolkit().getImage(GamePanel.class.getResource("background.jpeg"));
+        img2 = Toolkit.getDefaultToolkit().getImage(GamePanel.class.getResource("back2.jpg"));
+        img3 = Toolkit.getDefaultToolkit().getImage(GamePanel.class.getResource("result.gif"));
         gmf = new GameFrame();
 		gmf.getContentPane().add(this);
 		gmf.pack();
@@ -60,7 +64,7 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 	// ==============================================================
 	
 	private void drawScore(Graphics g) {
-		g.setColor(Color.white);
+		g.setColor(Color.black);
 		g.setFont(fnt);
 		if (CommandCenter.getScore() != 0) {
 			g.drawString("SCORE :  " + CommandCenter.getScore() + " LEVEL : " + CommandCenter.getLevel(), nFontWidth, nFontHeight);
@@ -80,12 +84,22 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 		// Fill in background with black.
 		//grpOff.setColor(Color.black);
 		//grpOff.fillRect(0, 0, Game.DIM.width, Game.DIM.height);
-        grpOff.drawImage(img, 0, 0, this);
+        grpOff.drawImage(img2, 0, 0, this);
 
 		drawScore(grpOff);
-        if (!CommandCenter.isPlaying()) {
-			displayTextOnScreen();
-		} else if (CommandCenter.isPaused()) {
+        if (!CommandCenter.isPlaying()&&!CommandCenter.isGameover()) {
+             displayTextOnScreen();
+
+
+		}
+        else if(!CommandCenter.isPlaying()&&CommandCenter.isGameover()){
+            displayResultOnScreen();
+
+            if (CommandCenter.isPaused()) {
+                displayTextOnScreen();
+            }
+        }
+        else if (CommandCenter.isPaused()) {
 			strDisplay = "Game Paused";
 			grpOff.drawString(strDisplay,
 					(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4);
@@ -106,6 +120,7 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 			drawNumberShipsLeft(grpOff);
 			if (CommandCenter.isGameOver()) {
 				CommandCenter.setPlaying(false);
+                CommandCenter.setbGameover(true);
 				//bPlaying = false;
 			}
 		}
@@ -174,9 +189,11 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 	// This method draws some text to the middle of the screen before/after a game
 	private void displayTextOnScreen() {
         grpOff.drawImage(img, 0, 0, this);
-		strDisplay = "GAME OVER";
-		grpOff.drawString(strDisplay,
-				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4);
+        grpOff.setFont(fnt);
+        grpOff.setColor(Color.white);
+//		strDisplay = "GAME OVER";
+//		grpOff.drawString(strDisplay,
+//				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4);
 
 		strDisplay = "use the arrow keys to turn and thrust";
 		grpOff.drawString(strDisplay,
@@ -218,6 +235,30 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 						+ nFontHeight + 320);
 
 	}
+
+     private void displayResultOnScreen() {
+         grpOff.drawImage(img3, 0, 0, this);
+         grpOff.setFont(fntBig);
+         strDisplay = "GAME OVER";
+         grpOff.drawString(strDisplay,
+                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 3 , Game.DIM.height / 4
+                    +20);
+
+         long x = CommandCenter.getScore();
+         strDisplay = "Your score is " + x;
+
+
+         grpOff.drawString(strDisplay,
+                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 3, Game.DIM.height / 4
+                         + nFontHeight + 100);
+
+         strDisplay = "Press p to exit.";
+         grpOff.drawString(strDisplay,
+                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 3, Game.DIM.height / 4
+                         + nFontHeight + 180);
+
+
+     }
 	
 	public GameFrame getFrm() {return this.gmf;}
 	public void setFrm(GameFrame frm) {this.gmf = frm;}	

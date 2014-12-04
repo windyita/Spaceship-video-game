@@ -241,7 +241,8 @@ public class Game implements Runnable, KeyListener {
 
 			//we know this is an Asteroid, so we can cast without threat of ClassCastException
 			Asteroid astExploded = (Asteroid)movFoe;
-//            Explosion exp = new Explosion(movFoe);
+            Explosion exp = new Explosion(movFoe);
+            exp.expire();
 //            while(exp.getnExpiry()>0){
 //                exp.expire();
 //            }
@@ -298,9 +299,9 @@ public class Game implements Runnable, KeyListener {
 		//make the appearance of power-up dependent upon ticks and levels
 		//the higher the level the more frequent the appearance
 		//if (nTick % (SPAWN_NEW_SHIP_FLOATER - nLevel * 7) == 0) {
-        if(nTick % (40* nLevel) == 0){
-			CommandCenter.movFloaters.add(new NewShipFloater());
-		}
+//        if(nTick % (40* nLevel) == 0){
+//			CommandCenter.movFloaters.add(new NewShipFloater());
+//		}
 	}
 
 	// Called when user presses 's'
@@ -309,6 +310,7 @@ public class Game implements Runnable, KeyListener {
 		CommandCenter.initGame();
 		CommandCenter.setLevel(0);
 		CommandCenter.setPlaying(true);
+        CommandCenter.setbGameover(false);
 		CommandCenter.setPaused(false);
 		//if (!bMuted)
 		   // clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY);

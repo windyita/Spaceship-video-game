@@ -48,32 +48,34 @@ public class Falcon extends Sprite {
 		ArrayList<Point> pntCs = new ArrayList<Point>();
 		
 		// top of ship
-		pntCs.add(new Point(0, 18)); 
-		
+		pntCs.add(new Point(0, 18));
+
 		//right points
-		pntCs.add(new Point(3, 3)); 
-		pntCs.add(new Point(12, 0)); 
-		pntCs.add(new Point(13, -2)); 
-		pntCs.add(new Point(13, -4)); 
-		pntCs.add(new Point(11, -2)); 
-		pntCs.add(new Point(4, -3)); 
-		pntCs.add(new Point(2, -10)); 
-		pntCs.add(new Point(4, -12)); 
-		pntCs.add(new Point(2, -13)); 
+		pntCs.add(new Point(3, 3));
+		pntCs.add(new Point(12, 0));
+		pntCs.add(new Point(13, -2));
+		pntCs.add(new Point(13, -4));
+		pntCs.add(new Point(11, -2));
+		pntCs.add(new Point(4, -3));
+		pntCs.add(new Point(2, -10));
+		pntCs.add(new Point(4, -12));
+		pntCs.add(new Point(2, -13));
 
 		//left points
-		pntCs.add(new Point(-2, -13)); 
+		pntCs.add(new Point(-2, -13));
 		pntCs.add(new Point(-4, -12));
-		pntCs.add(new Point(-2, -10)); 
-		pntCs.add(new Point(-4, -3)); 
+		pntCs.add(new Point(-2, -10));
+		pntCs.add(new Point(-4, -3));
 		pntCs.add(new Point(-11, -2));
 		pntCs.add(new Point(-13, -4));
-		pntCs.add(new Point(-13, -2)); 
-		pntCs.add(new Point(-12, 0)); 
-		pntCs.add(new Point(-3, 3)); 
-		
+		pntCs.add(new Point(-13, -2));
+		pntCs.add(new Point(-12, 0));
+		pntCs.add(new Point(-3, 3));
 
-		assignPolarPoints(pntCs);
+
+        pntCs.add(new Point(-3, 3));
+
+        assignPolarPoints(pntCs);
 
 		setColor(Color.white);
 		
@@ -104,15 +106,15 @@ public class Falcon extends Sprite {
 
         //this just keeps the sprite inside the bounds of the frame
         if (pnt.x > getDim().width) {
-            setCenter(new Point(getDim().width-1, pnt.y));
+            setCenter(new Point(getDim().width-50, pnt.y));
         } else if (pnt.x < 0) {
-            setCenter(new Point(1, pnt.y));
+            setCenter(new Point(50, pnt.y));
             //setCenter(new Point(5, pnt.y));
         } else if (pnt.y > getDim().height) {
-            setCenter(new Point(pnt.x, getDim().height-1));
+            setCenter(new Point(pnt.x, getDim().height-50));
 
         } else if (pnt.y < 0) {
-            setCenter(new Point(pnt.x, 1));
+            setCenter(new Point(pnt.x, 50));
         } else {
             setCenter(new Point((int) dX, (int) dY));
         }
@@ -179,8 +181,10 @@ public class Falcon extends Sprite {
 		//does the fading at the beginning or after hyperspace
 		Color colShip;
 		if (getFadeValue() == 255) {
+
 			colShip = Color.white;
 		} else {
+
 			colShip = new Color(adjustColor(getFadeValue(), 200), adjustColor(
 					getFadeValue(), 175), getFadeValue());
 		}
@@ -244,8 +248,11 @@ public class Falcon extends Sprite {
 
 	public void drawShipWithColor(Graphics g, Color col) {
 		super.draw(g);
-		g.setColor(col);
+
+        setColor(new Color(Game.R.nextInt(256),Game.R.nextInt(256),Game.R.nextInt(256)));
+		//g.setColor(col);
 		g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
+        g.fillPolygon(getXcoords(), getYcoords(), dDegrees.length);
 	}
 
 	public void fadeInOut() {
